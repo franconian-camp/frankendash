@@ -1,0 +1,101 @@
+<html>
+<head>
+	<title>
+		FrankenDash 0.1
+	</title>
+</head>
+<!-- thejeremail@n2n//#cccamp2019 -->
+<body>
+</boody>
+<footer>
+	FRANKENDASH 0.1 - Current Viewlet: <b id="viewletName">none</b>
+</footer>
+<style>
+	iframe{
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		width: 100%;
+		height: 95%;
+		height: calc(100% - 1.1em);
+	}
+	footer{
+		position: absolute;
+		bottom: 0%;
+		left: 0%;
+		width: 100%;
+		height: 5%;
+		height: calc(1.1em);
+		overflow: hidden;
+	}
+	body{
+		color: #FFFFFF;
+		background-color: #211212;
+		font-family: sans-serif;
+	}
+</style>
+<script>
+	playlist = [
+		{
+			url: "https://franconian.camp/",
+			name: "Franconian Village Start",
+			duration: 10,
+		},
+		{
+			url: "https://engerla.passt.net/public-dashboard",
+			name: "Engerla Dashboard",
+			duration: 120,
+		},
+		{
+			url: "https://dashboard.camp.ccc.de/?orgId=1&kiosk",
+			name: "Camp Dashboard",
+			duration: 60,
+		},
+	]
+
+
+	index = -1;
+	name = "Loading...";
+	lastIndex = 0;
+	time = 0;
+
+	function update(){
+		time--;
+		if(time < 0)
+			advancePlaylist();
+
+		document.getElementById("viewletName").innerText = name + " ("+time+")";
+	}
+
+	function advancePlaylist(){
+		lastIndex = index;
+		index++;
+		
+		if(index >= playlist.length) index = 0;
+
+		time = playlist[index].duration;
+		name = playlist[index].name;
+
+		switchTab();
+	}
+
+	function switchTab(){
+		var last = document.getElementById("viewlet_"+lastIndex); if(last) last.style.opacity="0";
+		document.getElementById("viewlet_"+index).style.opacity="1";		
+	}
+	
+	function init(){
+		for(var i in playlist){
+			view = document.createElement("iframe");
+			view.id = "viewlet_"+i;
+			view.src = playlist[i].url;
+			view.frameBorder = "0";
+			view.style.opacity = "0";
+			document.body.appendChild(view);
+		}
+		setInterval(update,1000);
+	}
+
+	init();
+</script>
+</html>
