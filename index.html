@@ -1,17 +1,10 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title>
-		FrankenDash 0.1
-	</title>
-</head>
-<!-- thejeremail@n2n//#cccamp2019 -->
-<body>
-</boody>
-<footer>
-	FRANKENDASH 0.1 - Current Viewlet: <b id="viewletName">none</b>
-</footer>
-<style>
-	iframe{
+	<meta charset="utf-8">
+	<title>FrankenDash 0.1</title>
+	<style>
+	iframe {
 		position: absolute;
 		top: 0%;
 		left: 0%;
@@ -19,7 +12,8 @@
 		height: 95%;
 		height: calc(100% - 1.1em);
 	}
-	footer{
+
+	footer {
 		position: absolute;
 		bottom: 0%;
 		left: 0%;
@@ -28,13 +22,18 @@
 		height: calc(1.1em);
 		overflow: hidden;
 	}
-	body{
+
+	body {
 		color: #FFFFFF;
 		background-color: #211212;
 		font-family: sans-serif;
 	}
-</style>
-<script>
+	</style>
+</head>
+<!-- thejeremail@n2n//#cccamp2019 -->
+<body>
+	<footer>FRANKENDASH 0.1 - Current Viewlet: <b id="viewletName">none</b></footer>
+	<script>
 	playlist = [
 		{
 			url: "https://franconian.camp/",
@@ -59,7 +58,7 @@
 	lastIndex = 0;
 	time = 0;
 
-	function update(){
+	function update() {
 		time--;
 		if(time < 0)
 			advancePlaylist();
@@ -67,7 +66,7 @@
 		document.getElementById("viewletName").innerText = name + " ("+time+")";
 	}
 
-	function advancePlaylist(){
+	function advancePlaylist() {
 		lastIndex = index;
 		index++;
 		
@@ -79,12 +78,12 @@
 		switchTab();
 	}
 
-	function switchTab(){
+	function switchTab() {
 		var last = document.getElementById("viewlet_"+lastIndex); if(last) last.style.opacity="0";
 		document.getElementById("viewlet_"+index).style.opacity="1";		
 	}
 	
-	function init(){
+	function init() {
 		for(var i in playlist){
 			view = document.createElement("iframe");
 			view.id = "viewlet_"+i;
@@ -97,5 +96,6 @@
 	}
 
 	init();
-</script>
+	</script>
+</body>
 </html>
